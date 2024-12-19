@@ -52,9 +52,10 @@ const ALL_USERS = [
         const decoded = jwt.verify(token, jwtPassword);
         const username = decoded.username;
         res.send({username: username});
-  } catch (err) {
-    return res.status(403).json({
-      msg: "Invalid token",
-    });
+    } 
+    catch (err) {
+        return res.status(403).json({
+         msg: "Invalid token",
+        });
     }
     });
