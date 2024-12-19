@@ -1,6 +1,7 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const app = express();
+const jwtPassword = "123456";
 
 app.use(express.json());
 
@@ -27,6 +28,7 @@ const ALL_USERS = [
     for(let i = 0; i < ALL_USERS.length; i++)
     {
         if(ALL_USERS[i].username === username && ALL_USERS[i].password === password)
+            console.log(ALL_USERS[i].username, ALL_USERS[i].password);
             return true;
     }
     return false;
@@ -37,11 +39,11 @@ const ALL_USERS = [
     let password = req.params.password;
     if(!userExist(username, password))
     {
-        return res.json({msg :"User does not exist"});
+        return res.status(403).json({msg :"User does not exist"});
     }
     else
     {
-        var token = jwt.sign({username: username, password: password});
+        var token = jwt.sign({username: username, password: password}, "shhhhh");
         return res.json({token,});
     }
   });
