@@ -28,15 +28,17 @@ const ALL_USERS = [
     for(let i = 0; i < ALL_USERS.length; i++)
     {
         if(ALL_USERS[i].username === username && ALL_USERS[i].password === password)
+        {
             console.log(ALL_USERS[i].username, ALL_USERS[i].password);
             return true;
+        }
     }
     return false;
   }
 
   app.post("/signin", function(req, res){
-    let username = req.params.username;
-    let password = req.params.password;
+    let username = req.body.username;
+    let password = req.body.password;
     if(!userExist(username, password))
     {
         return res.status(403).json({msg :"User does not exist"});
@@ -53,7 +55,8 @@ const ALL_USERS = [
     try{
         const decoded = jwt.verify(token, jwtPassword);
         const username = decoded.username;
-        res.send({username: username});
+        const password = decoded.password;
+        res.send({"username": username, "password": password});
     } 
     catch (err) {
         return res.status(403).json({
