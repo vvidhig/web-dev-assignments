@@ -31,3 +31,16 @@ const ALL_USERS = [
     }
     return false;
   }
+
+  app.post("/signin", function(req, res){
+    let username = req.params.username;
+    let password = req.params.password;
+    if(!userExist(username, password))
+    {
+        res.send("User does not exist");
+    }
+    else
+    {
+        var token = jwt.sign({username: username, password: password})
+    }
+  });
