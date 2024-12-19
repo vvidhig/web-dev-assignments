@@ -41,6 +41,20 @@ const ALL_USERS = [
     }
     else
     {
-        var token = jwt.sign({username: username, password: password})
+        var token = jwt.sign({username: username, password: password});
+        return res.json({token,});
     }
   });
+
+  app.get("/users", function(req, res){
+    const token = req.headers.authorization;
+    try{
+        const decoded = jwt.verify(token, jwtPassword);
+        const username = decoded.username;
+        res.send({username: username});
+  } catch (err) {
+    return res.status(403).json({
+      msg: "Invalid token",
+    });
+    }
+    });
