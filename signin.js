@@ -37,7 +37,7 @@ const ALL_USERS = [
     let password = req.params.password;
     if(!userExist(username, password))
     {
-        res.send("User does not exist");
+        return res.json({msg :"User does not exist"});
     }
     else
     {
