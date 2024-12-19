@@ -43,7 +43,7 @@ const ALL_USERS = [
     }
     else
     {
-        var token = jwt.sign({username: username, password: password}, "shhhhh");
+        var token = jwt.sign({username: username, password: password}, jwtPassword);
         return res.json({token,});
     }
   });
