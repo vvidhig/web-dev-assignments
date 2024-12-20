@@ -22,7 +22,9 @@ async function main() {
     // 1. Create a new user
     // await insertUser(collection, "Vidhi Gupta", "vvidhig@gmail.com", "123456");
     // await insertUser(collection, "Rahul Gupta", "rgnerd@gmail.com", "123123");
-    // await insertUser(collection, "Vinayak Gupta", "lalulalu@gmail.com", "12231223");
+    await insertUser(collection, "Vinayak Gupta", "lalulalu@gmail.com", "12231223");
+    await insertUser(collection, "Shivank Chaudhury", "shivank@gmail.com", "147147");
+    await insertUser(collection, "Rajesh Kumar Gupta", "rajeshgupta@gmail.com", "126126");
 
     // 2. Finding all documents
      await fetchUsers(collection);
