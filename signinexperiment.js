@@ -49,6 +49,10 @@ app.post("/addUsers", async function (req, res) {
 });
 
 app.get("/getUsers", async function(req, res) {
-
+    const email = req.headers.email;
+    if(!email)
+    {
+        return res.status(400).json({msg: "Please pass the email correctly"});
+    }
 });
 
