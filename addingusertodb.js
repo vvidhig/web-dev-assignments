@@ -19,10 +19,12 @@ async function main() {
     // Define a collection to work with
     const collection = db.collection("Users");
 
-    // Insert multiple users
-    await insertUser(collection, "Vidhi Gupta", "vvidhig@gmail.com", "123456");
-    await insertUser(collection, "Rahul Gupta", "rgnerd@gmail.com", "123123");
-    await insertUser(collection, "Vinayak Gupta", "lalulalu@gmail.com", "12231223");
+    // await insertUser(collection, "Vidhi Gupta", "vvidhig@gmail.com", "123456");
+    // await insertUser(collection, "Rahul Gupta", "rgnerd@gmail.com", "123123");
+    // await insertUser(collection, "Vinayak Gupta", "lalulalu@gmail.com", "12231223");
+
+    await fetchUsers(collection);
+    
   } catch (error) {
     console.error("Error connecting to MongoDB:", error);
   } finally {
@@ -30,6 +32,12 @@ async function main() {
     await client.close();
   }
 }
+
+async function fetchUsers(collection) {
+  const users = await collection.find({}).toArray();
+  console.log("Users:", users);
+}
+
 
 async function insertUser(collection, name, email, password) {
   try {
