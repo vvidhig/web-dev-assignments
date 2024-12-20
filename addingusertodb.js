@@ -25,12 +25,15 @@ async function main() {
     // await insertUser(collection, "Vinayak Gupta", "lalulalu@gmail.com", "12231223");
 
     // 2. Finding all documents
-    // await fetchUsers(collection);
+     await fetchUsers(collection);
 
     // 3. Finding specific documents
-    await findUser(collection, "vvidhig@gmail.com");
-    await findUser(collection, "rgnerd@gmail.com");
-    await findUser(collection, "lalulalu@gmail.com");
+    // await findUser(collection, "vvidhig@gmail.com");
+    // await findUser(collection, "rgnerd@gmail.com");
+    // await findUser(collection, "lalulalu@gmail.com");
+
+    // 4. Updating documents
+    // await updateUser(collection)
     
   } catch (error) {
     console.error("Error connecting to MongoDB:", error);
@@ -48,6 +51,15 @@ async function fetchUsers(collection) {
 async function findUser(collection, e) {
   const user = await collection.findOne({ email: e });
   console.log("Found User:", user);
+}
+
+async function updateUser(collection) {
+  const result = await collection.updateOne(
+    { email: "vvidhig@gmail.com" }, // Filter
+    { $set: { password: "417417" } }           // Update
+  );
+  console.log("Matched Count:", result.matchedCount);
+  console.log("Modified Count:", result.modifiedCount);
 }
 
 async function insertUser(collection, name, email, password) {
