@@ -35,13 +35,13 @@ app.post("/addUsers", async function (req, res) {
     }
     try
     {
-        const existuser = await collection.findOne({ email: email});
-        if(existuser.email == email)
+        const existuser = await collection.findOne({ email });
+        if(existuser)
         {
             return res.status(409).json({msg: "User already exists"});
         }
-        const newuser = await collection.insertOne({name: name, email: email, password: password});
-        return res.status(200).json({msg:"User added successfully", UserActivationId : newuser.insertedId});
+        const newuser = await collection.insertOne({name, email, password});
+        return res.status(201).json({msg:"User added successfully", UserActivationId : newuser.insertedId});
     }
     catch(err)
     {
