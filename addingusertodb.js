@@ -1,32 +1,26 @@
-// const mongoose = require('mongoose');
+const { MongoClient } = require("mongodb");
+const url = "mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.3.7";
+const client = new MongoClient(url);
 
-// mongoose.connect("mongodb://localhost:27017/signinexperiment")
+async function main() {
+  try {
+    // Connect to the MongoDB server
+    await client.connect();
+    console.log("Connected successfully to MongoDB!");
 
-// const User = mongoose.model("User", {
-//     name: String,
-//     username: String,
-//     password: String,
-//   });
+    // Specify a database to work with
+    const dbName = "SigninExperiment"; // Replace with your database name
+    const db = client.db(dbName);
 
-// const user = new User({"name": "Vidhi Gupta", "username": "vvidhig@gmail.com", "password": "123456"});
-// user.save();
-
-const MongoClient = require("mongodb").MongoClient;
-
-const url = "mongodb://localhost:27017"; // Adjust this to your connection string
-const dbName = "SigninExperiment";
-
-MongoClient.connect(url, function (err, client) {
-  if (err) {
-    console.error("Error connecting to MongoDB:", err);
-    return;
+    // Example: List collections in the database
+    const collections = await db.collections();
+    console.log("Collections:", collections.map((col) => col.collectionName));
+  } catch (error) {
+    console.error("Error connecting to MongoDB:", error);
+  } finally {
+    // Close the connection
+    await client.close();
   }
-  const db = client.db(dbName);
-  db.dropDatabase(function (err, result) {
-    if (err) {
-      console.error("Error dropping database:", err);
-      return;
-    }
-    console.log("Database dropped:", dbName);
-  });
-});
+}
+
+main();
