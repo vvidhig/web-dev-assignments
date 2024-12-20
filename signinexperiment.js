@@ -54,5 +54,17 @@ app.get("/getUsers", async function(req, res) {
     {
         return res.status(400).json({msg: "Please pass the email correctly"});
     }
+    try
+    {
+        const existuser = await collection.findOne({ email: email });
+        return res.json(existuser);
+    }
+    catch(err)
+    {
+        return res.status(500).json({msg: err.message});
+    }
 });
 
+app.listen(port, async () => {
+    console.log("Listening on port ", port);
+});
