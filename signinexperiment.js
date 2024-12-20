@@ -57,7 +57,7 @@ app.get("/getUsers", async function(req, res) {
     }
     try
     {
-        const existuser = await collection.findOne({ email: email });
+        const existuser = await collection.findOne({ email });
         return res.json(existuser);
     }
     catch(err)
@@ -68,4 +68,5 @@ app.get("/getUsers", async function(req, res) {
 
 app.listen(port, async () => {
     console.log("Listening on port ", port);
+    await connectDB();
 });
