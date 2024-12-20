@@ -19,11 +19,18 @@ async function main() {
     // Define a collection to work with
     const collection = db.collection("Users");
 
+    // 1. Create a new user
     // await insertUser(collection, "Vidhi Gupta", "vvidhig@gmail.com", "123456");
     // await insertUser(collection, "Rahul Gupta", "rgnerd@gmail.com", "123123");
     // await insertUser(collection, "Vinayak Gupta", "lalulalu@gmail.com", "12231223");
 
-    await fetchUsers(collection);
+    // 2. Finding all documents
+    // await fetchUsers(collection);
+
+    // 3. Finding specific documents
+    await findUser(collection, "vvidhig@gmail.com");
+    await findUser(collection, "rgnerd@gmail.com");
+    await findUser(collection, "lalulalu@gmail.com");
     
   } catch (error) {
     console.error("Error connecting to MongoDB:", error);
@@ -38,6 +45,10 @@ async function fetchUsers(collection) {
   console.log("Users:", users);
 }
 
+async function findUser(collection, e) {
+  const user = await collection.findOne({ email: e });
+  console.log("Found User:", user);
+}
 
 async function insertUser(collection, name, email, password) {
   try {
