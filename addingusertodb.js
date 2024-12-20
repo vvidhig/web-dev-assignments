@@ -25,7 +25,7 @@ async function main() {
     // await insertUser(collection, "Vinayak Gupta", "lalulalu@gmail.com", "12231223");
 
     // 2. Finding all documents
-    // await fetchUsers(collection);
+     await fetchUsers(collection);
 
     // 3. Finding specific documents
     // await findUser(collection, "vvidhig@gmail.com");
@@ -36,7 +36,7 @@ async function main() {
     // await updateUser(collection)
 
     // 5. Deleting a document
-    await deleteUser(collection);
+    // await deleteUser(collection);
 
   } catch (error) {
     console.error("Error connecting to MongoDB:", error);
@@ -78,7 +78,7 @@ async function insertUser(collection, name, email, password) {
   }
 }
 
-async function deleteUser() {
+async function deleteUser(collection) {
   const result = await collection.deleteOne({ email: "lalulalu@gmail.com" });
   console.log("Deleted Count:", result.deletedCount);
 }
